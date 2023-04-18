@@ -77,21 +77,21 @@ function showCategories() {
     x.addEventListener("click", function listFilter() {
       // innerHtml added white space on mac added .trim() to fix
       let category = x.innerHTML.toLowerCase().trim();
-      if (category === "all") {
+
+      let newList = data.filter((i) => i.category == category);
+      if (!newList.length && category !== "all") {
+        ul.innerHTML = "";
+        ul.insertAdjacentHTML(
+          "afterbegin",
+          `<h2>No Facts Found</h2>
+          `
+        );
+      } else if (category === "all") {
+        console.log("here");
         list(data);
       } else {
-        let newList = data.filter((i) => i.category == category);
-        if (newList.length) {
-          ul.innerHTML = "";
-          list(newList);
-        } else {
-          ul.innerHTML = "";
-          ul.insertAdjacentHTML(
-            "afterbegin",
-            `<h2>No Facts Found</h2>
-          `
-          );
-        }
+        ul.innerHTML = "";
+        list(newList);
       }
     });
   });
