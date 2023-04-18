@@ -57,7 +57,7 @@ ul {
   list-style: none;
 }
 
-h1 {
+h1, h2 {
   white-space: nowrap;
   font-size: 42px;
   text-transform: uppercase;

@@ -81,8 +81,17 @@ function showCategories() {
         list(data);
       } else {
         let newList = data.filter((i) => i.category == category);
-        ul.innerHTML = "";
-        list(newList);
+        if (newList.length) {
+          ul.innerHTML = "";
+          list(newList);
+        } else {
+          ul.innerHTML = "";
+          ul.insertAdjacentHTML(
+            "afterbegin",
+            `<h2>No Facts Found</h2>
+          `
+          );
+        }
       }
     });
   });
