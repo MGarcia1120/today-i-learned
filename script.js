@@ -19,7 +19,7 @@ const formSection = document.querySelector(".form-section");
 const form = document.querySelector(".fact-form");
 const textBox = document.querySelector(".text-box");
 const charCount = document.querySelector(".text-count");
-const categoryList = document.querySelector(".category-lists");
+const categoryList = document.querySelector(".category-list");
 const postButton = document.querySelector(".post");
 const maxNumOfChars = 200;
 let ul = document.getElementById("list");
@@ -70,18 +70,23 @@ form.addEventListener("submit", submitForm);
 
 data = JSON.parse(localStorage.getItem("data"));
 
-// function showCategories() {
-//   CATEGORIES.forEach((cat) => {
-//     categoryList.insertAdjacentHTML(
-//       "afterbegin",
-//       `<li class="category">
-//     <button id="test" class="btn btn-all-categories">${cat.name}</button>
-//   </li>`
-//     );
-//   });
-// }
+function showCategories() {
+  CATEGORIES.forEach((cat) => {
+    categoryList.insertAdjacentHTML(
+      "afterbegin",
+      `<li class="category">
+      <button
+        id="test"
+        class="btn-cat btn btn-categories"
+        style="background-color: ${cat.color}"
+      >
+        ${cat.name}
+      </button>`
+    );
+  });
+}
 
-// showCategories();
+showCategories();
 
 //My way of adding elements after fetching data.
 function list(facts) {
