@@ -13,12 +13,13 @@ const CATEGORIES = [
   { name: "news", color: "#8b5cf6" },
 ];
 
-const btn = document.querySelector(".btn-open");
+const btnOpen = document.querySelector(".btn-open");
 const catBtn = document.querySelectorAll("#test");
 const formSection = document.querySelector(".form-section");
 const form = document.querySelector(".fact-form");
 const textBox = document.querySelector(".text-box");
 const charCount = document.querySelector(".text-count");
+const categoryList = document.querySelector(".category-lists");
 const postButton = document.querySelector(".post");
 const maxNumOfChars = 200;
 let ul = document.getElementById("list");
@@ -26,7 +27,7 @@ const submitMessage = document.querySelector(".submit-msg");
 
 charCount.innerHTML = maxNumOfChars;
 
-btn.addEventListener("click", function () {
+btnOpen.addEventListener("click", function () {
   if (formSection.hasAttribute("hidden")) {
     formSection.removeAttribute("hidden");
     btn.innerHTML = "close";
@@ -51,14 +52,14 @@ const countCharacters = () => {
 
 textBox.addEventListener("input", countCharacters);
 
-catBtn.forEach((btn) => {
-  btn.addEventListener("click", function listFilter() {
-    console.log(btn.innerHTML.toLowerCase());
-    let category = btn.innerHTML.toLowerCase();
+catBtn.forEach((x) => {
+  x.addEventListener("click", function listFilter() {
+    // innerHtml added white space on mac added .trim() to fix
+    let category = x.innerHTML.toLowerCase().trim();
     if (category === "all") {
       list(data);
     } else {
-      let newList = data.filter((i) => i.category === category);
+      let newList = data.filter((i) => i.category == category);
       ul.innerHTML = "";
       list(newList);
     }
@@ -69,16 +70,20 @@ form.addEventListener("submit", submitForm);
 
 data = JSON.parse(localStorage.getItem("data"));
 
-//adding elements the long/hard way (pause)
-// data.forEach((i) => {
-//   var ul = document.getElementById("list");
-//   var li = document.createElement("li");
-//   li.className = "fact";
-//   li.innerHTML = i.text;
-//   ul.append(li);
-// });
+// function showCategories() {
+//   CATEGORIES.forEach((cat) => {
+//     categoryList.insertAdjacentHTML(
+//       "afterbegin",
+//       `<li class="category">
+//     <button id="test" class="btn btn-all-categories">${cat.name}</button>
+//   </li>`
+//     );
+//   });
+// }
 
-//My way of adding elements after fetching data. This is the easiest way to add html code using vanilla javascript
+// showCategories();
+
+//My way of adding elements after fetching data.
 function list(facts) {
   facts.forEach((i) => {
     let category = CATEGORIES.find((x) => x.name === i.category);
@@ -100,8 +105,6 @@ function list(facts) {
     );
   });
 }
-
-list(data);
 
 //The course's way of adding elements after getting data
 // const htmlArr = data.map(

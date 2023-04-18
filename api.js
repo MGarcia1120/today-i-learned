@@ -1,4 +1,7 @@
 export let jsondata;
+import { CATEGORIES } from "./data.js";
+
+let ul = document.getElementById("list");
 
 async function getFacts() {
   let url = "https://qhsxmcuoqnyhlmfwwkct.supabase.co/rest/v1/facts";
@@ -16,7 +19,27 @@ async function getFacts() {
         jsondata = data;
         localStorage.setItem("data", JSON.stringify(jsondata));
       })
-      .then(() => jsondata);
+      .then(() => {
+        jsondata.forEach((i) => {
+          let category = CATEGORIES.find((x) => x.name === i.category);
+
+          ul.insertAdjacentHTML(
+            "afterbegin",
+            `<li class="fact">
+      <p class="letter">${i.text}<a class="source"
+      href="
+      ${i.source}"
+      target="_blank">(Source)</a></p>
+      <span class="tag" style="background-color:${category.color}" >${i.category}</span>
+      <div class="btn-group">
+          <button>👍 ${i.voteInteresting}</button>
+          <button>😧 ${i.voteMindBlowing}</button>
+          <button>⛔ ${i.voteFalse}</button>
+      </div>
+    </li>`
+          );
+        });
+      });
   } catch (error) {
     console.log(error);
   }

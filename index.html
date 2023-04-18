@@ -1,82 +1,85 @@
 <html lang="en">
-
-<head>
+  <head>
     <title>Today I Learned</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Sono:wght@400;600;700&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet"
-          href="styles.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Coiny&family=Sono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="container">
+      <header class="header">
+        <div class="logo">
+          <img src="logo.png" alt="Today I Learned Logo" />
+          <h1>Today I Learned</h1>
+        </div>
+        <button class="btn-open btn btn-large">Share a Fact</button>
+      </header>
 
+      <section class="form-section" hidden>
+        <form class="fact-form">
+          <input
+            class="text-box"
+            id="fact"
+            type="text"
+            name="fact"
+            placeholder="Share a fact with the world..."
+          />
+          <span class="text-count"></span>
+          <input
+            type="text"
+            name="source"
+            placeholder="Trustworthy source..."
+          />
+          <select>
+            <option value="">Choose category:</option>
+            <option value="">Technology</option>
+            <option value="">Science</option>
+            <option value="">Finance</option>
+          </select>
+          <button class="post btn btn-large" type="submit">Post</button>
+        </form>
+      </section>
 
-        <header class="header">
-            <div class="logo">
-                <img src="logo.png"
-                     alt="Today I Learned Logo">
-                <h1>Today I Learned</h1>
-            </div>
-            <button class="btn-open btn btn-large">Share a Fact</button>
-        </header>
+      <main class="main">
+        <!-- aside is typically used for sidebars -->
+        <aside>
+          <ul class="category-list">
+            <li class="category">
+              <button id="test" class="btn btn-all-categories">All</button>
+            </li>
+            <li class="category">
+              <button
+                id="test"
+                class="btn-cat btn btn-categories"
+                style="background-color: blue"
+              >
+                Technology
+              </button>
+            </li>
+            <li class="category">
+              <button
+                id="test"
+                class="btn-cat btn btn-categories"
+                style="background-color: green"
+              >
+                Science
+              </button>
+            </li>
+          </ul>
+        </aside>
 
-        <section class="form-section"
-                 hidden>
-            <form class="fact-form">
-                <input class="text-box"
-                       id="fact"
-                       type="text"
-                       name="fact"
-                       placeholder="Share a fact with the world...">
-                <span class="text-count"></span>
-                <input type="text"
-                       name="source"
-                       placeholder="Trustworthy source...">
-                <select>
-                    <option value="">Choose category:</option>
-                    <option value="">Technology</option>
-                    <option value="">Science</option>
-                    <option value="">Finance</option>
-                </select>
-                <button class="post btn btn-large"
-                        type="submit">Post</button>
-            </form>
-
-        </section>
-
-
-        <main class="main">
-            <!-- aside is typically used for sidebars -->
-            <aside>
-                <ul>
-                    <li class="category"> <button id="test"
-                                class="btn btn-all-categories">All</button></li>
-                    <li class="category"> <button id="test"
-                                class="btn-cat btn btn-categories"
-                                style="background-color: blue;">Technology</button>
-                    </li>
-                    <li class="category"> <button id="test"
-                                class="btn-cat btn btn-categories"
-                                style="background-color: green;">Science</button></li>
-                </ul>
-            </aside>
-
-            <section>
-                <ul id="list">
-                    <!-- hardcoded list -->
-                    <!-- <li class="fact">
+        <section>
+          <ul id="list">
+            <!-- hardcoded list -->
+            <!-- <li class="fact">
                         <p class="letter">React is being developed by Meta (formerly facebook)
                             <a class="source"
                                href="
@@ -110,26 +113,14 @@
                             <button>⛔ 0</button>
                         </div>
                     </li> -->
-                </ul>
-            </section>
-        </main>
+          </ul>
+        </section>
+      </main>
 
-
-
-        <footer>
-
-        </footer>
-
-
-
-
-
+      <footer></footer>
     </div>
-</body>
+  </body>
 
-<script type="module"
-        src="api.js"></script>
-<script type="module"
-        src="script.js"></script>
-
+  <script type="module" src="api.js"></script>
+  <script type="module" src="script.js"></script>
 </html>
