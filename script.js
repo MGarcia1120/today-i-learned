@@ -14,7 +14,7 @@ const CATEGORIES = [
 ];
 
 const btnOpen = document.querySelector(".btn-open");
-const catBtn = document.querySelectorAll("#test");
+let catBtn;
 const formSection = document.querySelector(".form-section");
 const form = document.querySelector(".fact-form");
 const textBox = document.querySelector(".text-box");
@@ -52,20 +52,6 @@ const countCharacters = () => {
 
 textBox.addEventListener("input", countCharacters);
 
-catBtn.forEach((x) => {
-  x.addEventListener("click", function listFilter() {
-    // innerHtml added white space on mac added .trim() to fix
-    let category = x.innerHTML.toLowerCase().trim();
-    if (category === "all") {
-      list(data);
-    } else {
-      let newList = data.filter((i) => i.category == category);
-      ul.innerHTML = "";
-      list(newList);
-    }
-  });
-});
-
 form.addEventListener("submit", submitForm);
 
 data = JSON.parse(localStorage.getItem("data"));
@@ -76,13 +62,29 @@ function showCategories() {
       "afterbegin",
       `<li class="category">
       <button
-        id="test"
+        id="cat-btn"
         class="btn-cat btn btn-categories"
         style="background-color: ${cat.color}"
       >
         ${cat.name}
       </button>`
     );
+  });
+  // need this code within showCategories function to be able to select all the categories
+  catBtn = document.querySelectorAll("#cat-btn");
+  catBtn.forEach((x) => {
+    console.log(catBtn.length);
+    x.addEventListener("click", function listFilter() {
+      // innerHtml added white space on mac added .trim() to fix
+      let category = x.innerHTML.toLowerCase().trim();
+      if (category === "all") {
+        list(data);
+      } else {
+        let newList = data.filter((i) => i.category == category);
+        ul.innerHTML = "";
+        list(newList);
+      }
+    });
   });
 }
 
