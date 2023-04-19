@@ -1,6 +1,6 @@
-import { jsondata } from "./api.js";
-
-let data = jsondata;
+import { facts } from "./api.js";
+import { createFact } from "./api.js";
+import { getFacts } from "./api.js";
 
 const CATEGORIES = [
   { name: "technology", color: "#3b82f6" },
@@ -20,26 +20,37 @@ const form = document.querySelector(".fact-form");
 const textBox = document.querySelector(".text-box");
 const charCount = document.querySelector(".text-count");
 const categoryList = document.querySelector(".category-list");
-const postButton = document.querySelector(".post");
 const maxNumOfChars = 200;
 let ul = document.getElementById("list");
-const submitMessage = document.querySelector(".submit-msg");
 
 charCount.innerHTML = maxNumOfChars;
 
 btnOpen.addEventListener("click", function () {
   if (formSection.hasAttribute("hidden")) {
     formSection.removeAttribute("hidden");
-    btn.innerHTML = "close";
+    btnOpen.innerHTML = "close";
   } else {
     formSection.setAttribute("hidden", "");
-    btn.innerHTML = "share a fact";
+    btnOpen.innerHTML = "share a fact";
   }
 });
 
 const submitForm = (event) => {
   event.preventDefault();
-  alert("Form Submitted!");
+  alert("Added a new Fact!");
+
+  let text = document.querySelector("#text");
+  let source = document.querySelector("#source");
+  let category = document.querySelector("#category");
+
+  let obj = {
+    text: text.value,
+    source: source.value,
+    category: category.value,
+  };
+
+  createFact(obj);
+
   form.reset();
   charCount.innerHTML = maxNumOfChars;
 };
@@ -54,7 +65,7 @@ textBox.addEventListener("input", countCharacters);
 
 form.addEventListener("submit", submitForm);
 
-data = JSON.parse(localStorage.getItem("data"));
+// data = JSON.parse(localStorage.getItem("data"));
 
 function showCategories() {
   CATEGORIES.forEach((cat) => {
@@ -73,12 +84,11 @@ function showCategories() {
   // need this code within showCategories function to be able to select all the categories
   catBtn = document.querySelectorAll("#cat-btn");
   catBtn.forEach((x) => {
-    console.log(catBtn.length);
     x.addEventListener("click", function listFilter() {
       // innerHtml added white space on mac added .trim() to fix
       let category = x.innerHTML.toLowerCase().trim();
-
-      let newList = data.filter((i) => i.category == category);
+      console.log(category);
+      let newList = facts.filter((i) => i.category == category);
       if (!newList.length && category !== "all") {
         ul.innerHTML = "";
         ul.insertAdjacentHTML(
@@ -87,8 +97,8 @@ function showCategories() {
           `
         );
       } else if (category === "all") {
-        console.log("here");
-        list(data);
+        ul.innerHTML = "";
+        getFacts();
       } else {
         ul.innerHTML = "";
         list(newList);

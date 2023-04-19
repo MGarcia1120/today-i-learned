@@ -27,22 +27,28 @@
         <form class="fact-form">
           <input
             class="text-box"
-            id="fact"
+            id="text"
             type="text"
-            name="fact"
+            name="text"
             placeholder="Share a fact with the world..."
           />
           <span class="text-count"></span>
           <input
+            id="source"
             type="text"
             name="source"
             placeholder="Trustworthy source..."
           />
-          <select>
+          <select id="category">
             <option value="">Choose category:</option>
-            <option value="">Technology</option>
-            <option value="">Science</option>
-            <option value="">Finance</option>
+            <option value="technology">Technology</option>
+            <option value="science">Science</option>
+            <option value="finance">Finance</option>
+            <option value="society">Society</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="health">Health</option>
+            <option value="history">History</option>
+            <option value="news">News</option>
           </select>
           <button class="post btn btn-large" type="submit">Post</button>
         </form>
