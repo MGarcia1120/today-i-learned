@@ -1,6 +1,7 @@
 import { facts } from "./api.js";
 import { createFact } from "./api.js";
 import { getFacts } from "./api.js";
+import { updateVote } from "./api.js";
 
 const CATEGORIES = [
   { name: "technology", color: "#3b82f6" },
@@ -113,6 +114,7 @@ showCategories();
 function list(facts) {
   facts.forEach((i) => {
     let category = CATEGORIES.find((x) => x.name === i.category);
+    let id = i.id;
 
     ul.insertAdjacentHTML(
       "afterbegin",
@@ -123,12 +125,45 @@ function list(facts) {
     target="_blank">(Source)</a></p>
     <span class="tag" style="background-color:${category.color}" >${i.category}</span>
     <div class="btn-group">
-        <button>👍 ${i.voteInteresting}</button>
-        <button>😧 ${i.voteMindBlowing}</button>
-        <button>⛔ ${i.voteFalse}</button>
+    <button class="voteInteresting">👍 ${i.voteInteresting}</button>
+    <button class="voteMindBlowing">🤯 ${i.voteMindBlowing}</button>
+    <button class="voteFalse">⛔ ${i.voteFalse}</button>
     </div>
   </li>`
     );
+
+    let voteBtn1 = document.querySelector(".voteInteresting");
+    let voteBtn2 = document.querySelector(".voteMindBlowing");
+    let voteBtn3 = document.querySelector(".voteFalse");
+
+    let obj = {};
+
+    voteBtn1.addEventListener("click", () => {
+      let count;
+      count = Number(voteBtn1.innerHTML.replace("👍", "")) + 1;
+      console.log(count);
+      obj[`voteInteresting`] = count;
+      updateVote(id, obj);
+      voteBtn1.innerHTML = `👍 ${count}`;
+    });
+
+    voteBtn2.addEventListener("click", () => {
+      let count;
+      count = Number(voteBtn2.innerHTML.replace("🤯", "")) + 1;
+      obj[`voteMindBlowing`] = count;
+      updateVote(id, obj);
+      voteBtn2.innerHTML = `🤯 ${count}`;
+      console.log(count);
+    });
+
+    voteBtn3.addEventListener("click", () => {
+      let count;
+      count = Number(voteBtn3.innerHTML.replace("⛔", "")) + 1;
+      obj[`voteFalse`] = count;
+      updateVote(id, obj);
+      voteBtn3.innerHTML = `⛔ ${count}`;
+      console.log(count);
+    });
   });
 }
 
